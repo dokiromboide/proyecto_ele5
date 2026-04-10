@@ -1,0 +1,92 @@
+version: "3.9"
+
+# ============================================================
+# Docker Compose - Sistema de Asistencia Unimayor
+# Servicios: frontend (React) | backend (FastAPI) | db (PostgreSQL)
+# ============================================================
+
+services:
+
+  # ---------------------------------------------------------
+  # BASE DE DATOS - PostgreSQL
+  # ---------------------------------------------------------
+  db:
+    image: postgres:15-alpine
+    container_name: unimayor_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-unimayor_asistencia}
+      POSTGRES_USER: ${POSTGRES_USER:-unimayor_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-unimayor_secure_password_2024}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    networks:
+      - unimayor_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-unimayor_user} -d ${POSTGRES_DB:-unimayor_asistencia}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ---------------------------------------------------------
+  # BACKEND - FastAPI
+  # ---------------------------------------------------------
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: unimayor_backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-unimayor_user}:${POSTGRES_PASSWORD:-unimayor_secure_password_2024}@db:5432/${POSTGRES_DB:-unimayor_asistencia}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - reports_data:/app/reports
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - unimayor_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ---------------------------------------------------------
+  # FRONTEND - React (Vite)
+  # ---------------------------------------------------------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: unimayor_frontend
+    restart: unless-stopped
+    environment:
+      VITE_API_URL: http://localhost:8000
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - unimayor_net
+
+# ---------------------------------------------------------
+# VOLÚMENES Y REDES
+# ---------------------------------------------------------
+volumes:
+  postgres_data:
+    driver: local
+  reports_data:
+    driver: local
+
+networks:
+  unimayor_net:
+    driver: bridge

@@ -1,0 +1,41 @@
+{
+  "name": "unimayor-asistencia-frontend",
+  "version": "1.0.0",
+  "description": "Sistema de Toma de Asistencia - Colegio Mayor del Cauca",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext js,jsx",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.0",
+    "axios": "^1.7.2",
+    "react-query": "^3.39.3",
+    "@tanstack/react-query": "^5.49.2",
+    "react-hook-form": "^7.52.1",
+    "react-hot-toast": "^2.4.1",
+    "lucide-react": "^0.395.0",
+    "date-fns": "^3.6.0",
+    "recharts": "^2.12.7",
+    "jspdf": "^2.5.1",
+    "xlsx": "^0.18.5",
+    "qrcode.react": "^3.1.0",
+    "clsx": "^2.1.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.3.1",
+    "eslint": "^9.6.0",
+    "eslint-plugin-react": "^7.34.3",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "vitest": "^1.6.0",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.6"
+  }
+}

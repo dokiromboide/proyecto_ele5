@@ -1,0 +1,76 @@
+# ============================================================
+# .gitignore - proyecto_ele5
+# ============================================================
+
+# --- Claves SSH y secretos (NUNCA commitear) ---
+*_deploy_key
+*_deploy_key.pub
+*.pem
+*.key
+
+# --- Variables de entorno (NUNCA commitear .env real) ---
+.env
+.env.local
+.env.*.local
+.env.production
+
+# --- Python / FastAPI ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.venv
+venv/
+ENV/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# --- Node / React ---
+node_modules/
+dist/
+.cache/
+*.local
+
+# --- Docker ---
+*.log
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# --- Reportes generados ---
+reports/
+*.pdf
+*.xlsx
+
+# --- Uploads ---
+uploads/
+
+# --- Alembic ---
+backend/alembic/versions/*.pyc

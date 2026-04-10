@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   ESTILOS GLOBALES - UNIMAYOR
+   Colegio Mayor del Cauca
+   ============================================================ */
+
+@layer base {
+  :root {
+    --unimayor-blue: #1B3A5C;
+    --unimayor-blue-dark: #0769da;
+    --unimayor-gold: #F2C700;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #F5F5F5;
+    color: #212121;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-unimayor-yellow-500 hover:bg-unimayor-yellow-600 text-unimayor-green-700
+           font-semibold py-2.5 px-5 rounded-lg transition-all duration-200
+           shadow-sm hover:shadow-md active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-unimayor-green-500 text-unimayor-green-500
+           hover:bg-unimayor-green-50 font-semibold py-2.5 px-5
+           rounded-lg transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-100 p-6;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2.5 border border-gray-300 rounded-lg
+           focus:outline-none focus:ring-2 focus:ring-unimayor-green-400
+           focus:border-transparent transition-all duration-200 bg-white;
+  }
+
+  .badge-presente {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs
+           font-medium bg-blue-100 text-blue-800;
+  }
+
+  .badge-ausente {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs
+           font-medium bg-red-100 text-red-800;
+  }
+
+  .badge-tardanza {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs
+           font-medium bg-yellow-100 text-yellow-800;
+  }
+
+  .sidebar-link {
+    @apply flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium
+           text-white/80 hover:text-white hover:bg-white/10 transition-all duration-150;
+  }
+
+  .sidebar-link.active {
+    @apply text-white bg-white/20;
+  }
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: #1B3A5C; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #152E4A; }
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.3s ease-out; }
