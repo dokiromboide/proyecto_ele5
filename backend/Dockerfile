@@ -8,7 +8,7 @@ FROM python:3.11-slim AS base
 WORKDIR /app
 
 # Dependencias del sistema
-RUN apt-get update && apt-get install -y \
+RUN apt-get update -o Acquire::ForceIPv4=true && apt-get install -y \
     curl \
     gcc \
     libpq-dev \
