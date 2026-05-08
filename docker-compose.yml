@@ -22,7 +22,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     ports:
-      - "5432:5432"
+      - "5011:5432"
     networks:
       - unimayor_net
     healthcheck:
@@ -45,7 +45,7 @@ services:
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-unimayor_user}:${POSTGRES_PASSWORD:-unimayor_secure_password_2024}@db:5432/${POSTGRES_DB:-unimayor_asistencia}
     ports:
-      - "8000:8000"
+      - "3511:8000"
     volumes:
       - ./backend:/app
       - reports_data:/app/reports
@@ -72,7 +72,7 @@ services:
     environment:
       VITE_API_URL: http://localhost:8000
     ports:
-      - "3000:80"
+      - "3011:80"
     depends_on:
       - backend
     networks:
